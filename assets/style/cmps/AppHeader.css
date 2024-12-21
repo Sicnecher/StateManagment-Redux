@@ -1,0 +1,45 @@
+.app-header {
+    background: linear-gradient(to bottom, var(--clr1), rgb(14, 124, 106));
+    color: var(--clr2bg-light);
+    
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+}
+
+.header-container h1 {
+    flex-grow: 1;
+}
+
+.app-nav {
+    display: flex;
+    gap: 15px;
+}
+
+
+a.active {
+    color: rgb(241, 212, 241);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.progress-bar {
+    background: linear-gradient(to top,rgb(52, 118, 194), rgb(14, 124, 106));
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+
+@media (max-width: 720px) {
+    .app-header {
+        color: var(--clr2bg-light);
+    }
+}

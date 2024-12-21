@@ -1,0 +1,17 @@
+.todo-filter {
+  background-color: var(--clr2bg);
+  padding: 1em;
+  margin: 1em 0;
+  form {
+    display: flex;
+    gap: 10px;
+    input {
+      background: none;
+      border: none;
+      border-bottom: 1px solid black;
+    }
+    select {
+      background: none;
+    }
+  }
+}
