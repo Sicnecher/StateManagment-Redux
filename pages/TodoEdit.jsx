@@ -48,8 +48,9 @@ export function TodoEdit() {
       txt: ev.target.txt.value,
       importance: ev.target.importance.value,
       isDone: ev.target.isDone.checked,
-      todoColor: ev.target.color.value,
+      color: ev.target.color.value,
     };
+    console.log(formData)
     stateTodoActions
       .saveTodo(formData)
       .then(() => {

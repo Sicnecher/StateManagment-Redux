@@ -24,7 +24,7 @@ export function AppHeader() {
       calc = calc === Infinity ? 0 : JSON.stringify(calc * 100);
       console.log(calc, typeof calc, allTodos.length, doneTodos.length);
       setDonePrec(
-        `${calc === 0 ? calc : calc[0] + calc[1] + calc[2] + calc[3]}%`
+        `${calc === "0" ? calc : calc[0] + calc[1] + calc[2] + calc[3]}%`
       );
     }
     setProgressBar();

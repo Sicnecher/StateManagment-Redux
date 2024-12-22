@@ -11,5 +11,4 @@ const rootReducer = combineReducers({
 })
 
 export const store = createStore(rootReducer, composeEnhancers())
-console.log(store)
 window.gStore = store
