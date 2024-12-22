@@ -1,0 +1,11 @@
+.todo-index{
+    display: flex;
+    flex-direction: column;
+    button{
+        align-self: center;
+    }
+    h2{
+        font-weight: bold;
+        font-size: 30px;
+    }
+}

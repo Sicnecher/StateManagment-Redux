@@ -57,7 +57,7 @@ function save(todo) {
     return storageService.put(TODO_KEY, todo);
   } else {
     todo.createdAt = todo.updatedAt = Date.now();
-
+    console.log('sfdjkhskdfjhskdfkusfdkuh')
     return storageService.post(TODO_KEY, todo);
   }
 }

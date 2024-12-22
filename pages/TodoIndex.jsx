@@ -41,13 +41,13 @@ export function TodoIndex() {
   if (!todos) return <div>Loading...</div>;
   return (
     <section className="todo-index">
+      <h2>Todos List</h2>
       <TodoFilter />
-      <div>
-        <Link to="/todo/edit" className="btn">
+      <button>
+        <Link to="/todo/edit">
           Add Todo
         </Link>
-      </div>
-      <h2>Todos List</h2>
+      </button>
       <TodoList onRemoveTodo={onRemoveTodo} onToggleTodo={onToggleTodo} />
       <hr />
       <h2>Todos Table</h2>
