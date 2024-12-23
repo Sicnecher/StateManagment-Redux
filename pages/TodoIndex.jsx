@@ -7,6 +7,7 @@ import {
   showSuccessMsg,
 } from "../services/event-bus.service.js";
 import { stateTodoActions } from "../store/action/todo.actions.js";
+import { stateUserActions } from "../store/action/user.actions.js";
 
 const { useState, useEffect } = React;
 const { Link, useSearchParams } = ReactRouterDOM;
@@ -16,6 +17,8 @@ export function TodoIndex() {
   const dispatch = useDispatch();
 
   const todos = useSelector((state) => state.todoModule.todos);
+
+  const user = useSelector((state) => state.userModule.loggedInUser);
 
   const filterBy = useSelector((state) => state.todoModule.filterBy);
 
@@ -28,8 +31,10 @@ export function TodoIndex() {
   }, [filterBy]);
 
   const onRemoveTodo = (todoId) => {
-    showRemoveConfirmMsg("Are you sure you want to delete?", () => {
-      stateTodoActions.removeTodo(todoId);
+    showRemoveConfirmMsg("Are you sure you want to delete?", async () => {
+      const removedTodo = await stateTodoActions.removeTodo(todoId);
+      const updatedActivity = { title: "Removed a todo", description: removedTodo[0].txt, time: Date.now() };
+      user.fullname && stateUserActions.updateUser({...user, activities:[...user.activities, updatedActivity]});
     });
   };
 

@@ -21,10 +21,9 @@ export function AppHeader() {
       const allTodos = await todoService.query();
       const doneTodos = allTodos.filter((todo) => todo.isDone);
       let calc = doneTodos.length / allTodos.length;
-      calc = calc === Infinity ? 0 : JSON.stringify(calc * 100);
-      console.log(calc, typeof calc, allTodos.length, doneTodos.length);
+      calc = calc === Infinity ? 0 : JSON.stringify(calc * 100).slice(0, 4);
       setDonePrec(
-        `${calc === "0" ? calc : calc[0] + calc[1] + calc[2] + calc[3]}%`
+        `${calc}%`
       );
     }
     setProgressBar();

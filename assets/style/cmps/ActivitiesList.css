@@ -1,0 +1,35 @@
+.activities-list {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+  }
+  
+  .activities-list thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  .activities-list th,
+  .activities-list td {
+    padding: 12px 15px;
+  }
+  
+  .activities-list tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  .activities-list tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+  }
+  
+  .activities-list tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+  }
+  
+  .activities-list tbody tr:hover {
+    background-color: #f1f1f1;
+  }

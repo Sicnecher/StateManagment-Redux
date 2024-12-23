@@ -49,8 +49,9 @@ export function TodoEdit() {
       importance: ev.target.importance.value,
       isDone: ev.target.isDone.checked,
       color: ev.target.color.value,
+      _id: params.todoId,
+      updatedAt: Date.now(),
     };
-    console.log(formData)
     stateTodoActions
       .saveTodo(formData)
       .then(() => {
@@ -60,6 +61,7 @@ export function TodoEdit() {
         console.log("err:", err);
         showErrorMsg("Cannot save todo");
       });
+      navigate("/todo");
   }
 
   const { txt, importance, isDone, todoColor } = todoToEdit;

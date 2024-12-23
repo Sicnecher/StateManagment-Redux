@@ -10,6 +10,7 @@
 
 /* Pages */
 @import "pages/TodoIndex.css";
+@import "pages/UserDetails.css";
 
 /* Components */
 @import "cmps/AppHeader.css";
@@ -19,6 +20,7 @@
 @import "cmps/DataTable.css";
 @import "cmps/FancyBox.css";
 @import "cmps/SplitPane.css";
+@import "cmps/ActivitiesList.css";
 
 @import "cmps/TodoFilter.css";
 @import "cmps/TodoList.css";

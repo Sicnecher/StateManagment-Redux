@@ -23,7 +23,7 @@ export function TodoList({ onRemoveTodo, onToggleTodo }) {
               <button>
                 <Link to={`/todo/${todo._id}`}>Details</Link>
               </button>
-              <Link to={`/book/edit/${todo._id}`}>
+              <Link to={`/todo/edit/${todo._id}`}>
                 <i className="bi bi-pencil-square"></i>
               </Link>
             </section>

@@ -46,8 +46,10 @@ function get(todoId) {
   });
 }
 
-function remove(todoId) {
-  return storageService.remove(TODO_KEY, todoId);
+async function remove(todoId) { 
+  const response = await storageService.remove(TODO_KEY, todoId);
+  console.log(response);
+  return response;
 }
 
 function save(todo) {
