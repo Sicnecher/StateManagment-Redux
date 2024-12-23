@@ -14,29 +14,34 @@ import { store } from "./store/store.js";
 import { UserDetails } from "./pages/UserDetails.jsx";
 import { userService } from "./services/user.service.js";
 const { useSelector, Provider } = ReactRedux;
+const { QueryClient, QueryClientProvider } = ReactQuery;
+
+const queryClient = new QueryClient();
 
 export function RootCmp() {
   return (
     <Provider store={store}>
       <Router>
-        <section className="app main-layout">
-          <AppHeader />
-          <main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />}>
-                <Route path="team" element={<AboutTeam />} />
-                <Route path="vision" element={<AboutVision />} />
-              </Route>
-              <Route path="/todo/:todoId" element={<TodoDetails />} />
-              <Route path="/todo/edit/:todoId" element={<TodoEdit />} />
-              <Route path="/todo/edit" element={<TodoEdit />} />
-              <Route path="/todo" element={<TodoIndex />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/user/:userId" element={<UserDetails />} />
-            </Routes>
-          </main>
-        </section>
+        <QueryClientProvider client={queryClient}>
+          <section className="app main-layout">
+            <AppHeader />
+            <main>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />}>
+                  <Route path="team" element={<AboutTeam />} />
+                  <Route path="vision" element={<AboutVision />} />
+                </Route>
+                <Route path="/todo/:todoId" element={<TodoDetails />} />
+                <Route path="/todo/edit/:todoId" element={<TodoEdit />} />
+                <Route path="/todo/edit" element={<TodoEdit />} />
+                <Route path="/todo" element={<TodoIndex />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/user/:userId" element={<UserDetails />} />
+              </Routes>
+            </main>
+          </section>
+        </QueryClientProvider>
       </Router>
     </Provider>
   );

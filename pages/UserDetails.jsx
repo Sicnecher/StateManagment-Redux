@@ -10,22 +10,18 @@ export function UserDetails() {
   useEffect(() => {
     userService
       .getById(params.userId)
-      .then((user) => {
-        setUser(user);
-        setUserToEdit(user);
+      .then((responseUser) => {
+        setUser(responseUser);
       })
       .catch((err) => {
         console.log("User not found", err);
-      })
-      .finally(() => {
-        console.log("User:", user);
       });
   }, []);
 
   function handleChange({ target }) {
     const field = target.name;
     let value = target.value;
-    
+
     // set user to edit
     setUser((prevUser) => ({ ...prevUser, [field]: value }));
     stateUserActions.updateUser({ ...user, [field]: value });
@@ -40,7 +36,9 @@ export function UserDetails() {
         <h2>This is your data</h2>
         <form className="user-details-form" onChange={handleChange}>
           <h2>Details:</h2>
-          <label htmlFor="username">Name:</label>
+          <label htmlFor="fullname">Full Name:</label>
+          <input type="text" id="fullname" name="fullname" value={fullname} />
+          <label htmlFor="username">Username:</label>
           <input type="text" id="username" name="username" value={username} />
           <label htmlFor="email">Color:</label>
           <input type="color" id="color" name="color" value={color} />

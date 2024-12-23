@@ -1,20 +1,19 @@
 import { TodoPreview } from "./TodoPreview.jsx";
 const { Link } = ReactRouterDOM;
 const { useSelector } = ReactRedux;
-const { useEffect } = React;
+const { useEffect, useState } = React;
 
-export function TodoList({ onRemoveTodo, onToggleTodo }) {
-  const todos = useSelector((state) => state.todoModule.todos);
+export function TodoList({ todos, onRemoveTodo, onToggleTodo }) {
   useEffect(() => {
-    console.log("TodoList todos:", todos);
-  }, [todos]);
+    console.log("todos", todos);
+  }, [todos])
   return (
     todos &&
     todos.length > 0 && (
       <ul className="todo-list">
         {todos.map((todo, idx) => (
           <li key={todo._id}>
-            <TodoPreview idx={idx} onToggleTodo={onToggleTodo} />
+            <TodoPreview idx={idx} todo={todo} onToggleTodo={onToggleTodo} />
             <section>
               <i
                 className="bi bi-trash3"

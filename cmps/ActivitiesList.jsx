@@ -6,8 +6,6 @@ export function ActivitiesList({ activities }) {
   useEffect(() => {
     const time = new Date(activities.time);
     setTimeString(time.toDateString());
-    console.log("timeString:", time.toDateString());
-    console.log(activities);
   }, []);
   return (
     timeString && (
@@ -22,9 +20,9 @@ export function ActivitiesList({ activities }) {
             </tr>
           </thead>
           <tbody>
-            {activities.map((activity) => {
+            {activities.map((activity, idx) => {
               return (
-                <tr key={activity.id}>
+                <tr key={idx}>
                   <td>{activity.title}</td>
                   <td>{activity.description}</td>
                   <td>{timeString}</td>

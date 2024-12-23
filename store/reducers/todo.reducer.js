@@ -7,12 +7,14 @@ export const UPDATE_TODO = "UPDATE_TODO";
 export const SET_FILTER_BY = "SET_FILTER_BY";
 export const SET_IS_LOADING = "SET_IS_LOADING";
 export const UNDO_TODOS = "UNDO_TODOS";
+export const SET_DONE_PERC = "SET_DONE_PERC";
 
 const initialState = {
   todos: [],
   filterBy: todoService.getDefaultFilter(),
   isLoading: false,
   lastTodos: [],
+  donePerc: "0%",
 };
 
 export function todoReducer(state = initialState, cmd = {}) {
@@ -45,6 +47,11 @@ export function todoReducer(state = initialState, cmd = {}) {
         ...state,
         filterBy: { ...state.filterBy, ...cmd.filterBy },
       };
+    case SET_DONE_PERC:
+      return {
+        ...state,
+        donePerc: cmd.donePerc,
+      };
     case SET_IS_LOADING:
       return {
         ...state,
@@ -55,6 +62,7 @@ export function todoReducer(state = initialState, cmd = {}) {
         ...state,
         todos: [...state.lastTodos],
       };
-    default: return state;
+    default:
+      return state;
   }
 }

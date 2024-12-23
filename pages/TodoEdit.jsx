@@ -1,14 +1,18 @@
 import { todoService } from "../services/todo.service.js";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
 import { stateTodoActions } from "../store/action/todo.actions.js";
+import { stateUserActions } from "../store/action/user.actions.js";
 
 const { useState, useEffect } = React;
 const { useNavigate, useParams } = ReactRouterDOM;
+const { useSelector, useDispatch } = ReactRedux;
 
 export function TodoEdit() {
   const [todoToEdit, setTodoToEdit] = useState(todoService.getEmptyTodo());
   const navigate = useNavigate();
   const params = useParams();
+
+  const user = useSelector((state) => state.userModule.loggedInUser);
 
   useEffect(() => {
     if (params.todoId) loadTodo();
@@ -54,14 +58,30 @@ export function TodoEdit() {
     };
     stateTodoActions
       .saveTodo(formData)
-      .then(() => {
-        showSuccessMsg("Todo saved");
+      .then((savedTodo) => {
+        stateTodoActions.setDonePrecents();
+        const updatedActivity = {
+          title: params.todoId ? "Updated a todo" : "Added a todo",
+          description: savedTodo.txt,
+          time: Date.now(),
+        };
+        stateUserActions
+          .updateUser({
+            ...user,
+            activities: [...user.activities, updatedActivity],
+          })
+          .then(() => {
+            showSuccessMsg("Todo saved");
+            navigate("/todo");
+          })
+          .catch((err) => {
+            throw err;
+          });
       })
       .catch((err) => {
         console.log("err:", err);
         showErrorMsg("Cannot save todo");
       });
-      navigate("/todo");
   }
 
   const { txt, importance, isDone, todoColor } = todoToEdit;

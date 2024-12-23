@@ -10,7 +10,7 @@ export const stateUserActions = {
   login,
   signup,
   logout,
-  updateUser
+  updateUser,
 };
 
 async function login(credentials) {

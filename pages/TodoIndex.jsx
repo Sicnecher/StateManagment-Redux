@@ -12,6 +12,7 @@ import { stateUserActions } from "../store/action/user.actions.js";
 const { useState, useEffect } = React;
 const { Link, useSearchParams } = ReactRouterDOM;
 const { useSelector, useDispatch } = ReactRedux;
+const { useInfiniteQuery } = ReactQuery;
 
 export function TodoIndex() {
   const dispatch = useDispatch();
@@ -24,17 +25,40 @@ export function TodoIndex() {
 
   // Special hook for accessing search-params:
   const [searchParams, setSearchParams] = useSearchParams();
+  const [pageTodos, setPageTodos] = useState([]);
+  const [currPage, setCurrPage] = useState(0);
 
   useEffect(() => {
     setSearchParams(filterBy);
     stateTodoActions.loadTodos(filterBy);
   }, [filterBy]);
 
+  useEffect(() => {
+    if (!todos) return;
+    const result = [];
+    for (let i = 0; i < todos.length; i += 6) {
+      result.push(todos.slice(i, i + 6));
+    }
+    setPageTodos(result);
+  }, [todos]);
+
+  useEffect(() => {
+    console.log("pageTodos", pageTodos[currPage], "currPage", currPage);
+  }, [currPage, pageTodos]);
+
   const onRemoveTodo = (todoId) => {
     showRemoveConfirmMsg("Are you sure you want to delete?", async () => {
       const removedTodo = await stateTodoActions.removeTodo(todoId);
-      const updatedActivity = { title: "Removed a todo", description: removedTodo[0].txt, time: Date.now() };
-      user.fullname && stateUserActions.updateUser({...user, activities:[...user.activities, updatedActivity]});
+      const updatedActivity = {
+        title: "Removed a todo",
+        description: removedTodo[0].txt,
+        time: Date.now(),
+      };
+      user.fullname &&
+        stateUserActions.updateUser({
+          ...user,
+          activities: [...user.activities, updatedActivity],
+        });
     });
   };
 
@@ -43,17 +67,21 @@ export function TodoIndex() {
     return stateTodoActions.saveTodo(todoToSave);
   }
 
-  if (!todos) return <div>Loading...</div>;
+  if (!todos || !pageTodos[0]) return <div>Loading...</div>;
   return (
     <section className="todo-index">
       <h2>Todos List</h2>
       <TodoFilter />
       <button>
-        <Link to="/todo/edit">
-          Add Todo
-        </Link>
+        <Link to="/todo/edit">Add Todo</Link>
       </button>
-      <TodoList onRemoveTodo={onRemoveTodo} onToggleTodo={onToggleTodo} />
+      <TodoList
+        todos={pageTodos[currPage]}
+        onRemoveTodo={onRemoveTodo}
+        onToggleTodo={onToggleTodo}
+      />
+      <button onClick={() => setCurrPage((prev) => prev + 1)}>Next</button>
+      <button onClick={() => setCurrPage((prev) => prev - 1)}>Previous</button>
       <hr />
       <h2>Todos Table</h2>
       <div style={{ width: "60%", margin: "auto" }}>

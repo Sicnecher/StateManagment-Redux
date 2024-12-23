@@ -17,8 +17,9 @@ function query() {
   return storageService.query(STORAGE_KEY);
 
 }
-function getById(userId) {
-  return storageService.get(STORAGE_KEY, userId);
+async function getById(userId) {
+  const response = await storageService.get(STORAGE_KEY, userId);
+  return response;
 }
 
 function login({ username, password }) {

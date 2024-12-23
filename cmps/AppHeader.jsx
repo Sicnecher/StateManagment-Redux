@@ -8,26 +8,21 @@ import { LoginSignup } from "./LoginSignup.jsx";
 import { showErrorMsg } from "../services/event-bus.service.js";
 import { stateUserActions } from "../store/action/user.actions.js";
 import { todoService } from "../services/todo.service.js";
+import { SET_DONE_PREC } from "../store/reducers/todo.reducer.js";
+import { stateTodoActions } from "../store/action/todo.actions.js";
 
-const { useSelector } = ReactRedux;
+const { useSelector, useDispatch } = ReactRedux;
 
 export function AppHeader() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.userModule.loggedInUser);
-  const [donePrec, setDonePrec] = useState(null);
+  const donePerc = useSelector((state) => state.todoModule.donePerc);
 
   useEffect(() => {
-    async function setProgressBar(){
-      const allTodos = await todoService.query();
-      const doneTodos = allTodos.filter((todo) => todo.isDone);
-      let calc = doneTodos.length / allTodos.length;
-      calc = calc === Infinity ? 0 : JSON.stringify(calc * 100).slice(0, 4);
-      setDonePrec(
-        `${calc}%`
-      );
-    }
-    setProgressBar();
+    stateTodoActions.setDonePrecents();
   }, []);
+
   return (
     <div>
       <header className="app-header full main-layout">
@@ -52,10 +47,10 @@ export function AppHeader() {
         </section>
         <UserMsg />
       </header>
-      {donePrec && donePrec != "NaN%" && (
+      {donePerc && donePerc != "NaN%" && (
         <section className="progress-bar">
           <h3>Progress Bar:</h3>
-          <h4>{donePrec}</h4>
+          <h4>{donePerc}</h4>
         </section>
       )}
     </div>

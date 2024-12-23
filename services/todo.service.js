@@ -48,7 +48,6 @@ function get(todoId) {
 
 async function remove(todoId) { 
   const response = await storageService.remove(TODO_KEY, todoId);
-  console.log(response);
   return response;
 }
 
