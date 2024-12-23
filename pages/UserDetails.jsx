@@ -11,6 +11,8 @@ export function UserDetails() {
     userService
       .getById(params.userId)
       .then((responseUser) => {
+        document.documentElement.style.setProperty('--clr1bg', responseUser.bgColor);
+        document.documentElement.style.setProperty('--clr1', responseUser.color);
         setUser(responseUser);
       })
       .catch((err) => {
@@ -21,6 +23,11 @@ export function UserDetails() {
   function handleChange({ target }) {
     const field = target.name;
     let value = target.value;
+    console.log(value);
+    if (field === "bgColor")
+      document.documentElement.style.setProperty("--clr1bg", value);
+    if(field === "color")
+      document.documentElement.style.setProperty("--clr1", value);
 
     // set user to edit
     setUser((prevUser) => ({ ...prevUser, [field]: value }));

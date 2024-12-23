@@ -80,8 +80,12 @@ export function TodoIndex() {
         onRemoveTodo={onRemoveTodo}
         onToggleTodo={onToggleTodo}
       />
-      <button onClick={() => setCurrPage((prev) => prev + 1)}>Next</button>
-      <button onClick={() => setCurrPage((prev) => prev - 1)}>Previous</button>
+      <section className="pagination-buttons-container">
+        <button onClick={() => setCurrPage((prev) => prev + 1)}>Next</button>
+        <button onClick={() => setCurrPage((prev) => prev - 1)}>
+          Previous
+        </button>
+      </section>
       <hr />
       <h2>Todos Table</h2>
       <div style={{ width: "60%", margin: "auto" }}>

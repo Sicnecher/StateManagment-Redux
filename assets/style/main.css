@@ -11,6 +11,7 @@
 /* Pages */
 @import "pages/TodoIndex.css";
 @import "pages/UserDetails.css";
+@import "pages/main.css";
 
 /* Components */
 @import "cmps/AppHeader.css";
