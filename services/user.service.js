@@ -16,7 +16,6 @@ const STORAGE_KEY = "userDB";
 
 function query() {
   return storageService.query(STORAGE_KEY);
-
 }
 async function getById(userId) {
   const response = await storageService.get(STORAGE_KEY, userId);
@@ -33,13 +32,14 @@ function login({ username, password }) {
   });
 }
 
-function signup({ username, password, fullname }) {
+async function signup({ username, password, fullname }) {
   const user = {
     username,
     password,
     fullname,
     color: "#000000",
-    bgColor: "#000000",
+    bgColor: "#FFC0CB",
+    balance: 1000,
     createdAt: Date.now(),
     updatedAt: Date.now(),
     activities: [
@@ -50,8 +50,11 @@ function signup({ username, password, fullname }) {
       },
     ],
   };
-
-  return storageService.post(STORAGE_KEY, user).then(_setLoggedinUser);
+  const userToSave = await storageService
+    .post(STORAGE_KEY, user)
+    .then(_setLoggedinUser);
+  console.log("userToSave ", userToSave);
+  return userToSave;
 }
 
 function logout() {
@@ -64,10 +67,7 @@ function getLoggedinUser() {
 }
 
 async function update(user) {
-  await storageService.put(STORAGE_KEY, user);
-  return await storageService
-    .put(STORAGE_KEY_LOGGEDIN, user)
-    .then(_setLoggedinUser);
+  return await storageService.put(STORAGE_KEY, user).then(_setLoggedinUser);
 }
 
 function _setLoggedinUser(user) {
@@ -78,6 +78,7 @@ function _setLoggedinUser(user) {
     createdAt: user.createdAt,
     color: user.color,
     bgColor: user.bgColor,
+    balance: user.balance,
     activities: user.activities,
   };
   sessionStorage.setItem(STORAGE_KEY_LOGGEDIN, JSON.stringify(userToSave));
@@ -92,9 +93,9 @@ function getEmptyCredentials() {
   };
 }
 
-function setUserColors({bgColor, color}) {
-  document.documentElement.style.setProperty('--clr1bg', bgColor);
-  document.documentElement.style.setProperty('--clr1', color);
+function setUserColors({ bgColor, color }) {
+  document.documentElement.style.setProperty("--clr1bg", bgColor);
+  document.documentElement.style.setProperty("--clr1", color);
 }
 
 // signup({username: 'muki', password: 'muki1', fullname: 'Muki Ja'})

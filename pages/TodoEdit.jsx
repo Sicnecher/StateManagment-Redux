@@ -65,13 +65,13 @@ export function TodoEdit() {
           description: savedTodo.txt,
           time: Date.now(),
         };
+        user &&
         stateUserActions
           .updateUser({
             ...user,
             activities: [...user.activities, updatedActivity],
           })
           .then(() => {
-            showSuccessMsg("Todo saved");
             navigate("/todo");
           })
           .catch((err) => {

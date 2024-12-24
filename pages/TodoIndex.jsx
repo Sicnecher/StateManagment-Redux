@@ -33,7 +33,7 @@ export function TodoIndex() {
   }, [filterBy]);
 
   useEffect(() => {
-    if (!todos) return;
+    if (!todos || typeof todos === "string") return;
     const result = [];
     for (let i = 0; i < todos.length; i += 6) {
       result.push(todos.slice(i, i + 6));
@@ -42,10 +42,10 @@ export function TodoIndex() {
   }, [todos]);
 
   useEffect(() => {
-    if(user){
+    if (user) {
       userService.setUserColors(user);
     }
-  }, [user])
+  }, [user]);
 
   const onRemoveTodo = (todoId) => {
     showRemoveConfirmMsg("Are you sure you want to delete?", async () => {
@@ -63,12 +63,25 @@ export function TodoIndex() {
     });
   };
 
-  function onToggleTodo(todo) {
-    const todoToSave = { ...todo, isDone: !todo.isDone };
-    return stateTodoActions.saveTodo(todoToSave);
+  async function onToggleTodo(todo) {
+    const savedTodo = await stateTodoActions.saveTodo(todo);
+    await stateUserActions.updateUser({
+      ...user,
+      activities: [
+        ...user.activities,
+        {
+          title: todo.isDone ? "Finished a todo" : "Returned a todo",
+          description: savedTodo.txt,
+          time: Date.now(),
+        },
+      ],
+      balance: user.balance + 10,
+    });
+
+    return savedTodo;
   }
 
-  if (!todos || !pageTodos[0]) return <div>Loading...</div>;
+  if (typeof todos !== "string" && !pageTodos[0]) return <div>Loading...</div>;
   return (
     <section className="todo-index">
       <h2>Todos List</h2>
@@ -76,11 +89,15 @@ export function TodoIndex() {
       <button>
         <Link to="/todo/edit">Add Todo</Link>
       </button>
-      <TodoList
-        todos={pageTodos[currPage]}
-        onRemoveTodo={onRemoveTodo}
-        onToggleTodo={onToggleTodo}
-      />
+      {typeof todos === "string" ? (
+        <h3>{todos}</h3>
+      ) : (
+        <TodoList
+          todos={pageTodos[currPage]}
+          onRemoveTodo={onRemoveTodo}
+          onToggleTodo={onToggleTodo}
+        />
+      )}
       <section className="pagination-buttons-container">
         <button onClick={() => setCurrPage((prev) => prev - 1)}>
           Previous
@@ -88,10 +105,14 @@ export function TodoIndex() {
         <button onClick={() => setCurrPage((prev) => prev + 1)}>Next</button>
       </section>
       <hr />
-      <h2>Todos Table</h2>
-      <div style={{ width: "60%", margin: "auto" }}>
-        <DataTable todos={todos} onRemoveTodo={onRemoveTodo} />
-      </div>
+      {Array.isArray(todos) && (
+        <section>
+          <h2>Todos Table</h2>
+          <div style={{ width: "60%", margin: "auto" }}>
+            <DataTable todos={todos} onRemoveTodo={onRemoveTodo} />
+          </div>
+        </section>
+      )}
     </section>
   );
 }

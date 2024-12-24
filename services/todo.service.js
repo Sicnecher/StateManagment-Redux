@@ -51,14 +51,19 @@ async function remove(todoId) {
   return response;
 }
 
-function save(todo) {
+async function save(todo) {
+  console.log("todo", todo);
   if (todo._id) {
     // TODO - updatable fields
     todo.updatedAt = Date.now();
-    return storageService.put(TODO_KEY, todo);
+    const storageData = await storageService.put(TODO_KEY, todo);
+    console.log("storageData", storageData);
+    return storageData;
   } else {
     todo.createdAt = todo.updatedAt = Date.now();
-    return storageService.post(TODO_KEY, todo);
+    const storageData = await storageService.post(TODO_KEY, todo);
+    console.log("storageData", storageData);
+    return storageData;
   }
 }
 
@@ -137,11 +142,6 @@ function _getTodoCountByImportanceMap(todos) {
     { low: 0, normal: 0, urgent: 0 }
   );
   return todoCountByImportanceMap;
-}
-
-function setUserColors({bgColor, color}) {
-  document.documentElement.style.setProperty('--clr1bg', bgColor);
-  document.documentElement.style.setProperty('--clr1', color);
 }
 
 // Data Model:

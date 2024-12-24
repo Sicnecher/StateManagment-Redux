@@ -31,6 +31,7 @@ async function signup(credentials) {
   return await userService
     .signup(credentials)
     .then((user) => {
+      userService.setUserColors(user);
       store.dispatch({ type: SET_USER, user });
     })
     .then(() => showSuccessMsg("Signed up successfully"))

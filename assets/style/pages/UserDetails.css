@@ -9,7 +9,7 @@
   .user-details h1,
   .user-details h2,
   .user-details h3 {
-    color: #333;
+    color: var(--clr1);
   }
   
   .user-details h1 {

@@ -3,7 +3,11 @@ const { Link } = ReactRouterDOM;
 const { useSelector } = ReactRedux;
 const { useEffect, useState } = React;
 
-export function TodoList({ todos, onRemoveTodo, onToggleTodo }) {
+export function TodoList({
+  todos,
+  onRemoveTodo,
+  onToggleTodo,
+}) {
   return (
     todos &&
     todos.length > 0 && (

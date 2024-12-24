@@ -1,6 +1,6 @@
 body{
     background-color: var(--clr1bg);
-    color: var(--gray3);
+    color: var(--clr1);
 }
 
 body:hover{

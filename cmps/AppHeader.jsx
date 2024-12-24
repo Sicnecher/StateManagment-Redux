@@ -23,6 +23,10 @@ export function AppHeader() {
     stateTodoActions.setDonePrecents();
   }, []);
 
+  useEffect(() => {
+    console.log(user)
+  }, [user])
+
   return (
     <div>
       <header className="app-header full main-layout">
@@ -30,7 +34,7 @@ export function AppHeader() {
           <h1>React Todo App</h1>
           {user ? (
             <section>
-              <Link to={`/user/${user._id}`}>Hello {user.fullname}</Link>
+              <Link to={`/user/${user._id}`}>Hello {user.fullname} your balance is {user.balance}</Link>
               <button onClick={stateUserActions.logout}>Logout</button>
             </section>
           ) : (

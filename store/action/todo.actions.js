@@ -28,7 +28,10 @@ function loadTodos(filterBy) {
   return todoService
     .query(filterBy)
     .then((todos) => {
-      store.dispatch({ type: SET_TODOS, todos: todos });
+      store.dispatch({
+        type: SET_TODOS,
+        todos: todos[0] ? todos : "No matching todos.",
+      });
     })
     .catch((err) => {
       console.log("todo action -> Cannot load todos", err);
@@ -44,6 +47,7 @@ async function removeTodo(todoId) {
     const data = await todoService.remove(todoId);
     store.dispatch({ type: REMOVE_TODO, todoId });
     showSuccessMsg("Todo removed");
+    await setDonePrecents();
     return data;
   } catch (err) {
     console.log("todo action -> Cannot remove todo", err);
@@ -67,13 +71,15 @@ async function saveTodo(todo) {
     store.dispatch({ type: SET_IS_LOADING, isLoading: true });
     const savedTodo = await todoService.save(todo);
     store.dispatch({ type, todo: savedTodo });
+    console.log("todo action -> Todo saved", savedTodo);
     showSuccessMsg(
-      `Todo is ${savedTodo.isDone ? "saved" : "back on your list"}`
+      `Todo is ${savedTodo.isDone ? "finished" : "back on your list"}`
     );
+    await setDonePrecents();
     return savedTodo;
   } catch (err) {
     showErrorMsg("Cannot save todo");
-    console.log("todo action -> Cannot save todo", err);
+    console.log("todo action -> Cannot save todo", err, "todo:", todo);
     throw err;
   } finally {
     store.dispatch({ type: SET_IS_LOADING, isLoading: false });

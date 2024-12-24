@@ -36,6 +36,7 @@ export function todoReducer(state = initialState, cmd = {}) {
         lasttodos: [...state.todos],
       };
     case UPDATE_TODO:
+      console.log(state.todos);
       return {
         ...state,
         todos: state.todos.map((todo) =>
