@@ -139,6 +139,11 @@ function _getTodoCountByImportanceMap(todos) {
   return todoCountByImportanceMap;
 }
 
+function setUserColors({bgColor, color}) {
+  document.documentElement.style.setProperty('--clr1bg', bgColor);
+  document.documentElement.style.setProperty('--clr1', color);
+}
+
 // Data Model:
 // const todo = {
 //     _id: "gZ6Nvy",

@@ -6,6 +6,7 @@ import {
   showRemoveConfirmMsg,
   showSuccessMsg,
 } from "../services/event-bus.service.js";
+import { userService } from "../services/user.service.js";
 import { stateTodoActions } from "../store/action/todo.actions.js";
 import { stateUserActions } from "../store/action/user.actions.js";
 
@@ -24,12 +25,10 @@ export function TodoIndex() {
   const filterBy = useSelector((state) => state.todoModule.filterBy);
 
   // Special hook for accessing search-params:
-  const [searchParams, setSearchParams] = useSearchParams();
   const [pageTodos, setPageTodos] = useState([]);
   const [currPage, setCurrPage] = useState(0);
 
   useEffect(() => {
-    setSearchParams(filterBy);
     stateTodoActions.loadTodos(filterBy);
   }, [filterBy]);
 
@@ -43,8 +42,10 @@ export function TodoIndex() {
   }, [todos]);
 
   useEffect(() => {
-    console.log("pageTodos", pageTodos[currPage], "currPage", currPage);
-  }, [currPage, pageTodos]);
+    if(user){
+      userService.setUserColors(user);
+    }
+  }, [user])
 
   const onRemoveTodo = (todoId) => {
     showRemoveConfirmMsg("Are you sure you want to delete?", async () => {
@@ -81,10 +82,10 @@ export function TodoIndex() {
         onToggleTodo={onToggleTodo}
       />
       <section className="pagination-buttons-container">
-        <button onClick={() => setCurrPage((prev) => prev + 1)}>Next</button>
         <button onClick={() => setCurrPage((prev) => prev - 1)}>
           Previous
         </button>
+        <button onClick={() => setCurrPage((prev) => prev + 1)}>Next</button>
       </section>
       <hr />
       <h2>Todos Table</h2>

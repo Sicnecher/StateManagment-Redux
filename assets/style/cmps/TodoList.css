@@ -12,4 +12,32 @@
     justify-content: space-around;
     align-items: center;
     background-color: var(--clr1bg);
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px 4px black;
+    transition: all 0.2s ease-in-out;
+}
+
+.todo-list li:hover {
+    box-shadow: 1px 1px 1px 1px black;
+}
+
+.icon-large {
+    font-size: 32px;
+}
+
+.todo-list section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+    width: 100%;
+}
+
+i{
+    transition: all 0.2s ease-in-out;
+}
+
+i:hover {
+    cursor: pointer;
+    opacity: 0.8;
 }

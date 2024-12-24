@@ -9,6 +9,7 @@ export const userService = {
   update,
   query,
   getEmptyCredentials,
+  setUserColors,
 };
 const STORAGE_KEY_LOGGEDIN = "user";
 const STORAGE_KEY = "userDB";
@@ -89,6 +90,11 @@ function getEmptyCredentials() {
     username: "muki",
     password: "muki1",
   };
+}
+
+function setUserColors({bgColor, color}) {
+  document.documentElement.style.setProperty('--clr1bg', bgColor);
+  document.documentElement.style.setProperty('--clr1', color);
 }
 
 // signup({username: 'muki', password: 'muki1', fullname: 'Muki Ja'})

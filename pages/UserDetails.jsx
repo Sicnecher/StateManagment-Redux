@@ -11,8 +11,7 @@ export function UserDetails() {
     userService
       .getById(params.userId)
       .then((responseUser) => {
-        document.documentElement.style.setProperty('--clr1bg', responseUser.bgColor);
-        document.documentElement.style.setProperty('--clr1', responseUser.color);
+        userService.setUserColors(responseUser);
         setUser(responseUser);
       })
       .catch((err) => {

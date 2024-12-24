@@ -1,4 +1,8 @@
-#root{
+body{
     background-color: var(--clr1bg);
     color: var(--gray3);
+}
+
+body:hover{
+    cursor: default;
 }
