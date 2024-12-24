@@ -13,7 +13,7 @@ export function TodoList({
     todos.length > 0 && (
       <ul className="todo-list">
         {todos.map((todo, idx) => (
-          <li key={todo._id}>
+          <li key={todo._id} style={todo.color && { backgroundColor: todo.color }}>
             <TodoPreview idx={idx} todo={todo} onToggleTodo={onToggleTodo} />
             <section>
               <i

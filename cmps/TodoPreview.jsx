@@ -3,7 +3,7 @@ const { useEffect } = React;
 
 export function TodoPreview({ todo, idx, onToggleTodo }) {
   return (
-    <article className="todo-preview" style={todo.color && { backgroundColor: todo.color }}>
+    <article className="todo-preview">
       <h2
         className={todo.isDone ? "done" : ""}
         onClick={() => onToggleTodo({...todo, isDone: !todo.isDone})}
