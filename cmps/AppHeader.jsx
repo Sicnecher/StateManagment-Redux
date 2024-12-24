@@ -28,7 +28,7 @@ export function AppHeader() {
   }, [user])
 
   return (
-    <div>
+    <section className="app-header-container">
       <header className="app-header full main-layout">
         <section className="header-container">
           <h1>React Todo App</h1>
@@ -57,6 +57,6 @@ export function AppHeader() {
           <h4>{donePerc}</h4>
         </section>
       )}
-    </div>
+    </section>
   );
 }

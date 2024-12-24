@@ -9,7 +9,11 @@
 
 .todo-preview h4 {
     text-transform: capitalize;
-    color: black;
+    color: var(--clr1);
+}
+
+.todo-preview h2{
+    color: var(--clr1);
 }
 
 .todo-preview img {

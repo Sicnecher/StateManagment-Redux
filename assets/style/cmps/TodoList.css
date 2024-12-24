@@ -1,4 +1,5 @@
 .todo-list {
+    align-self: normal;
     padding: 15px 0 0;
     list-style: none;
     display: grid;
