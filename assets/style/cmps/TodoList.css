@@ -2,20 +2,27 @@
     align-self: normal;
     padding: 15px 0 0;
     list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 15px;
+    width: 70%;
+    align-self: end;
+    padding: 15px;
+    background-color: #bccfcf;
+    border-radius: 6px;
+    border: 1px solid #c3bbbb;
 }
 
 .todo-list li {
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     background-color: var(--clr1bg);
     border-radius: 10px;
     box-shadow: 4px 4px 4px 4px black;
     transition: all 0.2s ease-in-out;
+    padding: 10px;
 }
 
 .todo-list li:hover {
@@ -34,11 +41,30 @@
     width: 100%;
 }
 
-i{
+.buttons-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+i {
     transition: all 0.2s ease-in-out;
 }
 
 i:hover {
     cursor: pointer;
     opacity: 0.8;
+}
+
+/* Media query to adjust layout when space is limited */
+@media (max-width: 600px) {
+    .todo-list li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .buttons-container {
+        width: 100%;
+        justify-content: space-between;
+    }
 }

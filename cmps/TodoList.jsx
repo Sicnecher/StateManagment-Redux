@@ -14,7 +14,7 @@ export function TodoList({ todos, onRemoveTodo, onToggleTodo }) {
             style={todo.color && { backgroundColor: todo.color }}
           >
             <TodoPreview idx={idx} todo={todo} onToggleTodo={onToggleTodo} />
-            <section>
+            <section className="buttons-container">
               <i
                 className="bi bi-trash3 icon-large"
                 onClick={() => onRemoveTodo(todo._id)}

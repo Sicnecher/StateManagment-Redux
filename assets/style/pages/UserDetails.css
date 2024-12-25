@@ -1,58 +1,69 @@
 .user-details {
     padding: 20px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 1400px;
-    margin: 0 auto;
-    border: 4px solid black;
-  }
-  
-  .user-details h1,
-  .user-details h2,
-  .user-details h3 {
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.user-details h1,
+.user-details h2,
+.user-details h3 {
     color: var(--clr1);
-  }
-  
-  .user-details h1 {
-    font-size: 2em;
+    margin: 0;
+}
+
+.user-details h1 {
+    font-size: 2.5em;
     margin-bottom: 10px;
-  }
-  
-  .user-details h3 {
-    font-size: 1.2em;
+}
+
+.user-details h3 {
+    font-size: 1.5em;
     margin-bottom: 20px;
-  }
-  
-  .user-details-form {
+}
+
+.user-details-form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .user-details-form label {
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.user-details-form label {
     font-weight: bold;
     margin-bottom: 5px;
-  }
-  
-  .user-details-form input[type="text"],
-  .user-details-form input[type="color"] {
-    padding: 8px;
+    color: #333;
+}
+
+.user-details-form input[type="text"],
+.user-details-form input[type="color"] {
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1em;
-  }
-  
-  .user-details-form input[type="color"] {
-    width: 50px;
-    height: 30px;
+    transition: border-color 0.3s;
+}
+
+.user-details-form input[type="text"]:focus,
+.user-details-form input[type="color"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.user-details-form input[type="color"] {
+    width: 60px;
+    height: 35px;
     padding: 0;
-  }
-  
-  .user-details-form input[type="text"] {
+}
+
+.user-details-form input[type="text"] {
     width: 100%;
-  }
-  
-  .activities-list {
-    margin-top: 20px;
-  }
+}
+
+.activities-list {
+    margin-top: 30px;
+}

@@ -99,28 +99,31 @@ export function TodoIndex() {
       <Link to="/todo/edit">
         <i class="bi bi-plus-lg icon-large"></i>
       </Link>
-      {typeof todos === "string" ? (
-        <h3>{todos}</h3>
-      ) : (
-        <TodoList
-          todos={pageTodos[currPage]}
-          onRemoveTodo={onRemoveTodo}
-          onToggleTodo={onToggleTodo}
-        />
-      )}
+      <section className="main-page-container">
+        {Array.isArray(todos) && (
+          <div className="data-table-container">
+            <DataTable
+              todos={pageTodos[currPage]}
+              onRemoveTodo={onRemoveTodo}
+            />
+          </div>
+        )}
+        {typeof todos === "string" ? (
+          <h3>{todos}</h3>
+        ) : (
+          <TodoList
+            className="todo-list"
+            todos={pageTodos[currPage]}
+            onRemoveTodo={onRemoveTodo}
+            onToggleTodo={onToggleTodo}
+          />
+        )}
+      </section>
       <section className="pagination-buttons-container">
-        <button onClick={() => handleCurrPageChange(true)}>Previous</button>
-        <button onClick={() => handleCurrPageChange(false)}>Next</button>
+      <i onClick={() => handleCurrPageChange(true)} className="bi bi-arrow-left"></i>
+      <i onClick={() => handleCurrPageChange(false)} className="bi bi-arrow-right"></i>
       </section>
       <hr />
-      {Array.isArray(todos) && (
-        <section>
-          <h2>Todos Table</h2>
-          <div style={{ width: "60%", margin: "auto" }}>
-            <DataTable todos={todos} onRemoveTodo={onRemoveTodo} />
-          </div>
-        </section>
-      )}
     </section>
   );
 }

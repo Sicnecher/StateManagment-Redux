@@ -2,6 +2,13 @@
   /* background-color: var(--clr2bg); */
   padding: 1em;
   margin: 1em 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--clr1bg);
+  width:100%;
+  border-radius: 4px;
+  box-shadow: 3px 3px 3px 3px black;
   form {
     display: flex;
     gap: 10px;

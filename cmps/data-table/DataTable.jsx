@@ -1,7 +1,7 @@
 import { DataTableRow } from "./DataTableRow.jsx"
 
 export function DataTable({ todos, onRemoveTodo }) {
-    return <table border="1" className="data-table">
+    return <table border="1" className="data-table" style={{backgroundColor: 'white'}}>
         <thead>
             <tr>
                 <th style={{width: '1em'}}>&nbsp;</th>

@@ -17,6 +17,7 @@ async function login(credentials) {
   return await userService
     .login(credentials)
     .then((user) => {
+      userService.setUserColors(user);
       store.dispatch({ type: SET_USER, user });
     })
     .then(() => showSuccessMsg("Logged in successfully"))
