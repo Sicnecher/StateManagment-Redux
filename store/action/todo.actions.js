@@ -65,7 +65,7 @@ function removeTodoOptimistic(todoId) {
   });
 }
 
-async function saveTodo(todo) {
+async function saveTodo(todo, user = null) {
   const type = todo._id ? UPDATE_TODO : ADD_TODO;
   try {
     store.dispatch({ type: SET_IS_LOADING, isLoading: true });

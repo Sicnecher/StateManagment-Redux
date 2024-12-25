@@ -24,8 +24,8 @@ export function AppHeader() {
   }, []);
 
   useEffect(() => {
-    console.log(user)
-  }, [user])
+    console.log(user);
+  }, [user]);
 
   return (
     <section className="app-header-container">
@@ -34,7 +34,9 @@ export function AppHeader() {
           <h1>React Todo App</h1>
           {user ? (
             <section>
-              <Link to={`/user/${user._id}`}>Hello {user.fullname} your balance is {user.balance}</Link>
+              <Link to={`/user/${user._id}`}>
+                Hello {user.fullname} your balance is {user.balance}
+              </Link>
               <button onClick={stateUserActions.logout}>Logout</button>
             </section>
           ) : (

@@ -81,13 +81,13 @@ export function TodoIndex() {
     return savedTodo;
   }
 
-  function handleCurrPageChange(isReduce){
-    if(isReduce && currPage === 0){
+  function handleCurrPageChange(isReduce) {
+    if (isReduce && currPage === 0) {
       showErrorMsg("You are already on the first page");
-    }else if(!isReduce && currPage === pageTodos.length - 1){
+    } else if (!isReduce && currPage === pageTodos.length - 1) {
       showErrorMsg("You are already on the last page");
-    }else{
-      setCurrPage((prev) => isReduce ? prev - 1 : prev + 1);
+    } else {
+      setCurrPage((prev) => (isReduce ? prev - 1 : prev + 1));
     }
   }
 
@@ -96,7 +96,9 @@ export function TodoIndex() {
     <section className="todo-index">
       <h2>Todos List</h2>
       <TodoFilter />
-      <Link to="/todo/edit"><i class="bi bi-plus-lg icon-large"></i></Link>
+      <Link to="/todo/edit">
+        <i class="bi bi-plus-lg icon-large"></i>
+      </Link>
       {typeof todos === "string" ? (
         <h3>{todos}</h3>
       ) : (
@@ -107,9 +109,7 @@ export function TodoIndex() {
         />
       )}
       <section className="pagination-buttons-container">
-        <button onClick={() => handleCurrPageChange(true)}>
-          Previous
-        </button>
+        <button onClick={() => handleCurrPageChange(true)}>Previous</button>
         <button onClick={() => handleCurrPageChange(false)}>Next</button>
       </section>
       <hr />

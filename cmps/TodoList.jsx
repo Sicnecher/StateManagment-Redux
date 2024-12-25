@@ -3,17 +3,16 @@ const { Link } = ReactRouterDOM;
 const { useSelector } = ReactRedux;
 const { useEffect, useState } = React;
 
-export function TodoList({
-  todos,
-  onRemoveTodo,
-  onToggleTodo,
-}) {
+export function TodoList({ todos, onRemoveTodo, onToggleTodo }) {
   return (
     todos &&
     todos.length > 0 && (
       <ul className="todo-list">
         {todos.map((todo, idx) => (
-          <li key={todo._id} style={todo.color && { backgroundColor: todo.color }}>
+          <li
+            key={todo._id}
+            style={todo.color && { backgroundColor: todo.color }}
+          >
             <TodoPreview idx={idx} todo={todo} onToggleTodo={onToggleTodo} />
             <section>
               <i

@@ -25,7 +25,7 @@ export function UserDetails() {
     console.log(value);
     if (field === "bgColor")
       document.documentElement.style.setProperty("--clr1bg", value);
-    if(field === "color")
+    if (field === "color")
       document.documentElement.style.setProperty("--clr1", value);
 
     // set user to edit

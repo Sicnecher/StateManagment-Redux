@@ -8,16 +8,15 @@ export function ActivitiesList({ activities }) {
     const hours = Math.floor(diff / 1000 / 60 / 60);
     const minutes = Math.floor((diff / 1000 / 60) % 60);
     const seconds = Math.floor((diff / 1000) % 60);
-    return hours > 1 ?
-    "Couple of hours ago" :
-    hours === 1 ?
-    "An hour ago" :
-    minutes > 1 ?
-    `${minutes} minutes ago` :
-    minutes === 1 ?
-    "A minute ago" :
-    seconds > 1 &&
-    `${seconds} seconds ago`
+    return hours > 1
+      ? "Couple of hours ago"
+      : hours === 1
+      ? "An hour ago"
+      : minutes > 1
+      ? `${minutes} minutes ago`
+      : minutes === 1
+      ? "A minute ago"
+      : seconds > 1 && `${seconds} seconds ago`;
   }
 
   return (

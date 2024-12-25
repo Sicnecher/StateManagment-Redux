@@ -1,39 +1,38 @@
+import { eventBusService } from "../services/event-bus.service.js";
 
-
-import { eventBusService } from "../services/event-bus.service.js"
-
-const { useState, useEffect } = React
+const { useState, useEffect } = React;
 
 export function UserMsg() {
+  const [msg, setMsg] = useState(null);
 
-    const [msg, setMsg] = useState(null)
+  useEffect(() => {
+    const unsubscribe = eventBusService.on("show-user-msg", (msg) => {
+      setMsg(msg);
+      setTimeout(onCloseMsg, msg.type === "confirm" ? 4000 : 1500);
+    });
 
-    useEffect(() => {
-        const unsubscribe = eventBusService.on('show-user-msg', msg => {
-            setMsg(msg)
-            setTimeout(onCloseMsg, msg.type === "confirm" ? 4000 : 1500)
-        })
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
-        return () => {
-            unsubscribe()
-        }
-    }, [])
+  function onCloseMsg() {
+    setMsg(null);
+  }
 
-    function onCloseMsg() {
-        setMsg(null)
-    }
+  function handleConfirm() {
+    msg.onConfirm();
+    setMsg(null);
+  }
 
-    function handleConfirm() {
-        msg.onConfirm()
-        setMsg(null)
-    }
+  if (!msg) return null;
 
-    if (!msg) return null
-
-    return (
-        <section className={"user-msg " + msg.type}>
-            <p>{msg.txt}</p>
-            {msg.type === "confirm" && <button onClick={handleConfirm}>Confirm</button>}
-        </section>
-    )
+  return (
+    <section className={"user-msg " + msg.type}>
+      <p>{msg.txt}</p>
+      {msg.type === "confirm" && (
+        <button onClick={handleConfirm}>Confirm</button>
+      )}
+    </section>
+  );
 }

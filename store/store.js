@@ -1,14 +1,14 @@
-import { todoReducer } from './reducers/todo.reducer.js';
-import { userReducer } from './reducers/user.reducer.js';
+import { todoReducer } from "./reducers/todo.reducer.js";
+import { userReducer } from "./reducers/user.reducer.js";
 
 const { createStore, combineReducers, applyMiddleware, compose } = Redux;
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-    todoModule: todoReducer,
-    userModule: userReducer
-})
+  todoModule: todoReducer,
+  userModule: userReducer,
+});
 
-export const store = createStore(rootReducer, composeEnhancers())
-window.gStore = store
+export const store = createStore(rootReducer, composeEnhancers());
+window.gStore = store;

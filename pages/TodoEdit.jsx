@@ -66,17 +66,17 @@ export function TodoEdit() {
           time: Date.now(),
         };
         user &&
-        stateUserActions
-          .updateUser({
-            ...user,
-            activities: [...user.activities, updatedActivity],
-          })
-          .then(() => {
-            navigate("/todo");
-          })
-          .catch((err) => {
-            throw err;
-          });
+          stateUserActions
+            .updateUser({
+              ...user,
+              activities: [...user.activities, updatedActivity],
+            })
+            .then(() => {
+              navigate("/todo");
+            })
+            .catch((err) => {
+              throw err;
+            });
       })
       .catch((err) => {
         console.log("err:", err);

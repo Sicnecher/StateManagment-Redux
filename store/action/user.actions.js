@@ -48,7 +48,8 @@ async function logout() {
     .then(() => {
       userService.setUserColors({ color: "#2E302E", bgColor: "#99A695" });
       store.dispatch({ type: SET_USER, user: null });
-    }).then(() => showSuccessMsg("Logged out successfully"))
+    })
+    .then(() => showSuccessMsg("Logged out successfully"))
     .catch((err) => {
       showErrorMsg("OOPs try again");
       console.log("user actions -> Cannot logout", err);
