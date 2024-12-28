@@ -112,6 +112,7 @@ export function TodoEdit() {
             name="importance"
             id="importance"
           />
+          <h2>{importance}</h2>
         </section>
         <section>
           <label htmlFor="isDone">isDone:</label>
